@@ -2,7 +2,7 @@ package dev.trabalhopicpay.dtos.requests;
 
 import java.math.BigDecimal;
 
-// Objeto request(o corpo/body) da requisição que solicita uma transferência
+// Objeto request da requisição que solicita a transferência
 public class RequestTransaction {
 
     public Long senderId;
