@@ -1,6 +1,6 @@
 package dev.trabalhopicpay.dtos.responses;
 
-// Objeto response(o que vem como resposta no corpo/body) da requisição que solicita autorização de transferência
+// Objeto response da requisição que solicita autorização de transferência
 // mock - AuthorizationTransaction
 public class ResponseAuthorizationTransaction {
 
