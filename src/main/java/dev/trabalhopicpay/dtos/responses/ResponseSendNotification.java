@@ -1,6 +1,6 @@
 package dev.trabalhopicpay.dtos.responses;
 
-// Objeto response(o que vem como resposta no corpo/body) da requisição que envia uma notificação por e-mail
+// Objeto response da requisição que envia notificação
 // (mock - SendNotification)
 public class ResponseSendNotification {
 
