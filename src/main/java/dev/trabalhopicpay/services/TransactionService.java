@@ -19,29 +19,26 @@ import java.math.BigDecimal;
 @ApplicationScoped
 public class TransactionService {
 
-    // Injeta dependências
-    // O Quarkus, durante a execução, se encarrega de fornecer uma instância de UserService pronta para uso.
     @Inject
     UserService userService;
 
-    // Transactional pois o methode altera dados no banco de dados!
     @Transactional
     public Transaction createTransaction(RequestTransaction requestTransaction) throws  Exception{
 
-        // Validações das regras de negócio:
+        // Validações da regra
         BigDecimal amount = requestTransaction.amount;
         User sender = userService.findUserSenderById(requestTransaction.senderId);
         User receiver = userService.findUserReceiverById(requestTransaction.receiverId);
         userService.validadeTransaction(sender, requestTransaction.amount);
 
-        // Validação por autorização externa do Mock:
+        // Validação de autorização externa
         authorizeTransaction();
 
-        // Passando por todas às autorizações (não ocorreu nenhuma Exceptions) a transferência é realizada:
+        // Vendo todas às autorizações
         sender.balance = sender.balance.subtract(requestTransaction.amount);
         receiver.balance = receiver.balance.add(requestTransaction.amount);
 
-        // Persiste a transferência:
+        // Continua a transferência:
         Transaction transaction = new Transaction();
 
         transaction.amount = amount;
@@ -57,14 +54,10 @@ public class TransactionService {
         return transaction;
     }
 
-    // Injeta dependências
-    // O Quarkus, durante a execução, se encarrega de fornecer uma instância de AuthorizationTransaction pronta para uso.
     @Inject
     @RestClient
     AuthorizationTransaction authorizationTransaction;
 
-    // MOCK de Autorização da transação
-    // Se a autorização falhar uma Exception é lançada
     public void authorizeTransaction() throws Exception {
         try {
             ResponseAuthorizationTransaction response = authorizationTransaction.authorize();
@@ -73,14 +66,10 @@ public class TransactionService {
         }
     }
 
-    // Injeta dependências
-    // O Quarkus, durante a execução, se encarrega de fornecer uma instância de AuthorizationTransaction pronta para uso.
     @Inject
     @RestClient
     SendNotification sendNotification;
 
-    // MOCK que envia notificação
-    // Retorna o feedback da notificação (Sucesso ou Falha)
     public String sendNotificationEmail() {
         String notifyStatus;
         RequestSendNotification requestSendNotification = new RequestSendNotification();
