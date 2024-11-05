@@ -1,6 +1,6 @@
 package dev.trabalhopicpay.entitys.user;
 
-// Enum do tipo de usuário
+// Tipos de usuários
 public enum UserType {
     COMMON,
     MERCHANT
