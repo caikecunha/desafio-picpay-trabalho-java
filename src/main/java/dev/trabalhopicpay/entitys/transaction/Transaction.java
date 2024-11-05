@@ -15,21 +15,21 @@ public class Transaction extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    // Valor da transferência
+    // Valor a ser transferido
     public BigDecimal amount;
 
-    // Notificação do usuário que envia:
+    // Notificação do usuário que está a enviar
     public String notifySender;
 
-    // Notificação do usuário que recebe:
+    // Notificação do usuário que está a receber
     public String notifyReceiver;
 
-    // Usuário envia transferência
+    // Usuário que envia
     @ManyToOne
     @JoinColumn(name = "sender_id")
     public User sender;
 
-    // Usuário que recebe a transferência
+    // Usuário que recebe
     @ManyToOne
     @JoinColumn(name = "receiver_id")
     public User receiver;
