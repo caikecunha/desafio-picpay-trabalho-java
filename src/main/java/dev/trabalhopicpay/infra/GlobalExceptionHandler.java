@@ -6,7 +6,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
-// ### Vou criar o tratamento das Exceptions (Não se preocupem com isso por enquanto)
 @Provider
 public class GlobalExceptionHandler implements ExceptionMapper<Exception> {
 
